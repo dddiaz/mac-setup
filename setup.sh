@@ -36,9 +36,9 @@ brew install python3
 
 echo "Install python dependent packages"
 # Install awscli with python3 not python 2
-pip3 install awscli --user
+pip3 install awscli
 # Install ansible
-pip3 install ansible --user
+pip3 install ansible
 
 echo "Cleaning up brew"
 brew cleanup
