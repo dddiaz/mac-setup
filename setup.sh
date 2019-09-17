@@ -133,12 +133,23 @@ defaults write com.apple.finder FXPreferredViewStyle Clmv
 
 
 # Run Once Stuff
+
 # echo "Creating an SSH key for you..."
 # ssh-keygen -t rsa
 # echo "Please add this public key to Github \n"
 # echo "https://github.com/account/ssh \n"
 # read -p "Press [Enter] key after this..."
 
+# Setting up iterm colors
+# go to this site https://ethanschoonover.com/solarized/ to download color pallet
+# import to iterm
+#   iTerm → Preferences → Profiles → Colors → Color presets → Import
+#   Then again, Color presets → you-color-scheme-name
+# powerline fonts have already been installed, just need to switch to that font
+#   iTerm2 → Preferences → Profiles → Text → Change Font
+#   choose one of the meslo ones
+# Fianlly customize powerlevel, which i actually ended up disabling.
+# note i mostly folowed the guide here: https://medium.com/@Clovis_app/configuration-of-a-beautiful-efficient-terminal-and-prompt-on-osx-in-7-minutes-827c29391961
 
 
 killall Finder
