@@ -67,10 +67,14 @@ curl -L http://install.ohmyz.sh | sh
 
 echo "Setting up Zsh plugins..."
 cd ~/.oh-my-zsh/custom/plugins
-git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+  git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+fi
 
 echo "Setting ZSH as shell..."
-chsh -s /bin/zsh
+if [ "$SHELL" != "/bin/zsh" ]; then
+  chsh -s /bin/zsh
+fi
 
 # Apps
 apps=(
