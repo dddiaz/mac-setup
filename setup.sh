@@ -57,7 +57,7 @@ cd ~
 if [ -d ~/.dotfiles/ ]; then
   echo "Dotfiles Repo Exists"
   cd .dotfiles
-  git fetch
+  git pull
 else
   echo "Dotfile Repo DNE"
   git clone https://github.com/dddiaz/dotfiles.git .dotfiles
@@ -106,7 +106,6 @@ apps=(
   helm
   iterm2
   kubectl
-  onepassword
   osx
 )
 
