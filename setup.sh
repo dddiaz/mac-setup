@@ -1,5 +1,6 @@
 # Mac Setup Script
 # Daniel Diaz 2019
+# Note: This script is idempotent.
 
 echo "Installing xcode-select"
 xcode-select --install
@@ -51,24 +52,43 @@ brew cask install docker
 brew cask install jetbrains-toolbox
 brew cask install iterm2
 
-# echo "Copying dotfiles from Github"
-# cd ~
-# git clone git@github.com:dddiaz/dotfiles.git .dotfiles
-# cd .dotfiles
-# sh symdotfiles
+echo "Copying dotfiles from Github"
+cd ~
+if [ -d ~/.dotfiles/ ]; then
+  echo "Dotfiles Repo Exists"
+  cd .dotfiles
+  git fetch
+else
+  echo "Dotfile Repo DNE"
+  git clone https://github.com/dddiaz/dotfiles.git .dotfiles
+  cd .dotfiles
+fi
+echo "Symlinking Dot Files...(Note this will override existing files)"
+# remove the -f flag if you dont want to force override
+ln -sfv ~/.dotfiles/.zshrc ~
 
 #Install Zsh & Oh My Zsh
 echo "Installing Oh My ZSH..."
 curl -L http://install.ohmyz.sh | sh
 
-# echo "Setting up Oh My Zsh theme..."
-# cd  /Users/bradparbs/.oh-my-zsh/themes
-# curl https://gist.githubusercontent.com/bradp/a52fffd9cad1cd51edb7/raw/cb46de8e4c77beb7fad38c81dbddf531d9875c78/brad-muse.zsh-theme > brad-muse.zsh-theme
+echo "Setting up Oh My Zsh theme..."
+# Set up powerline fonts so that i can render special chars
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+
 
 echo "Setting up Zsh plugins..."
 cd ~/.oh-my-zsh/custom/plugins
 if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
   git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+fi
+if [ ! -d ~/.oh-my-zsh/custom/themes/powerlevel9k ]; then
+  git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 fi
 
 echo "Setting ZSH as shell..."
@@ -82,8 +102,6 @@ apps=(
   ansible
   brew
   docker
-  diffmerge
-  google-chrome
   gitignore
   helm
   iterm2
@@ -101,6 +119,9 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Showing all filename extensions in Finder by default 
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
+# Show all hidden files
+defaults write com.apple.Finder AppleShowAllFiles true
+
 #"Disabling the warning when changing a file extension"
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
@@ -108,6 +129,8 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder FXPreferredViewStyle Clmv
 
 # TODO: move app bar to left
+
+# TODO: show harddrive/homefolder in finder
 
 
 
