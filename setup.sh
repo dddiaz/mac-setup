@@ -133,6 +133,14 @@ defaults write com.apple.finder FXPreferredViewStyle Clmv
 # TODO: show harddrive/homefolder in finder
 
 
+# Run Once Stuff
+# echo "Creating an SSH key for you..."
+# ssh-keygen -t rsa
+# echo "Please add this public key to Github \n"
+# echo "https://github.com/account/ssh \n"
+# read -p "Press [Enter] key after this..."
+
+
 
 killall Finder
 
