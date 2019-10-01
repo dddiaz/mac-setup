@@ -132,6 +132,10 @@ defaults write com.apple.finder FXPreferredViewStyle Clmv
 # TODO: show harddrive/homefolder in finder
 
 
+echo "Installing 1password and 1password cli"
+brew cask install 1password
+brew cask install 1password-cli
+
 # Run Once Stuff
 
 # echo "Creating an SSH key for you..."
